@@ -2,6 +2,10 @@
 
 A progressive, project-based Python practice repository for strengthening interview readiness and demonstrating engineering growth from beginner fundamentals to expert-level design.
 
+> Coding workspace: Raspberry Pi `~/Projects/python-competency-lab`
+>
+> Begin with [START_HERE.md](START_HERE.md).
+
 ## Purpose
 
 This repository is both a learning log and a portfolio artifact. I will complete each project in sequence, write tests before or alongside implementation, document important decisions, and use issues and pull requests to preserve evidence of my progress.

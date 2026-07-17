@@ -22,6 +22,17 @@ I will build a reporting tool that imports synthetic expense transactions from C
 - Export a summary without modifying the source file.
 - Test rounding, empty files, and malformed rows.
 
+## Suggested working steps
+
+1. Define a small synthetic CSV schema and create a few sample rows.
+2. Parse one row into a validated record.
+3. Prove with a test why `Decimal` is preferable for currency.
+4. Group records by category, then by month.
+5. Render a deterministic report separately from calculations.
+6. Add row-specific errors for invalid dates, amounts, and missing values.
+
+**Think about:** Should one bad row invalidate the whole import? How will the caller know which row failed?
+
 ## Stretch work
 
 Add budgets, variance reporting, and a small HTML report.

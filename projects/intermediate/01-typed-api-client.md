@@ -23,6 +23,17 @@ I will create an installable Python client for a public HTTP API. It will conver
 - Unit-test behavior without requiring network access.
 - Provide one opt-in integration test against the real public API.
 
+## Suggested working steps
+
+1. Choose a harmless public API and record one example response.
+2. Design the smallest public client interface before selecting an HTTP library.
+3. Convert one response into a typed model.
+4. Inject the transport so unit tests do not require network access.
+5. Add pagination, then timeout and error mapping.
+6. Add one opt-in integration test after unit behavior is stable.
+
+**Think about:** Which HTTP details should callers see? Which failures should be retryable?
+
 ## Stretch work
 
 Add caching, synchronous and asynchronous transports, and generated API documentation.

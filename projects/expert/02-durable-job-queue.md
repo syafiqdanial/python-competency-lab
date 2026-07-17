@@ -24,6 +24,17 @@ I will build a small durable job queue with producers, workers, retries, visibil
 - Expose queue depth, latency, and failure metrics.
 - Test crashes and races rather than only the happy path.
 
+## Suggested working steps
+
+1. Write down the job states and every permitted transition.
+2. Enqueue and claim one job transactionally.
+3. Simulate two workers attempting the same claim.
+4. Add visibility timeout and abandoned-job recovery.
+5. Add bounded retries, terminal failures, and idempotency keys.
+6. Test crashes at each boundary and expose useful metrics.
+
+**Think about:** What does “exactly once” really mean here? Which operation must be atomic?
+
 ## Stretch work
 
 Add scheduled jobs, priorities, and a comparison document against established queue systems.

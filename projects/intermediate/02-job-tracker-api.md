@@ -24,6 +24,17 @@ I will build a REST API for tracking synthetic job applications through stages s
 - Test API, service, and persistence behavior.
 - Publish OpenAPI documentation without exposing secrets.
 
+## Suggested working steps
+
+1. Model a synthetic job application and its allowed statuses.
+2. Implement one create-and-read path using an in-memory repository.
+3. Add service-level rules for status transitions.
+4. Replace the repository with persistent storage without changing API behavior.
+5. Add filtering and pagination.
+6. Test validation, conflicts, missing records, and persistence isolation.
+
+**Think about:** Which rules belong in HTTP handlers, services, or persistence? What should happen during two conflicting updates?
+
 ## Stretch work
 
 Add optimistic concurrency, audit history, and a minimal browser interface.

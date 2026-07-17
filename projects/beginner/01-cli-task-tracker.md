@@ -23,6 +23,17 @@ I will build a command-line task tracker that can add, list, complete, edit, and
 - Reject malformed files and invalid commands clearly.
 - Test normal operations, missing IDs, and corrupted storage.
 
+## Suggested working steps
+
+1. Decide what fields a task needs and write down one sample task.
+2. Implement adding and listing tasks in memory before touching files.
+3. Write tests for empty lists, one task, and an unknown task ID.
+4. Add JSON loading and saving behind separate functions.
+5. Add complete, edit, and delete one operation at a time.
+6. Finish by testing a corrupted JSON file and reviewing the error message.
+
+**Think about:** Why should a task ID remain stable? What could happen if writing the JSON file is interrupted?
+
 ## Stretch work
 
 Add priorities, filtering, export, and atomic file replacement to avoid partial writes.

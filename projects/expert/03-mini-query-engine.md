@@ -24,6 +24,17 @@ I will build a small query engine that parses a deliberately limited expression 
 - Test parser invariants and evaluator edge cases.
 - Profile representative workloads before making optimization claims.
 
+## Suggested working steps
+
+1. Write a deliberately tiny grammar with two example queries.
+2. Tokenize input and report invalid characters with positions.
+3. Parse one comparison expression into an AST.
+4. Evaluate filters over records, then add projection.
+5. Add sorting and grouping while preserving deterministic behavior.
+6. Use property tests and profiling before attempting optimization.
+
+**Think about:** Which operations can stay lazy? Where does sorting force eager evaluation?
+
 ## Stretch work
 
 Add a query planner, indexes for selected fields, and benchmark comparisons between execution strategies.
