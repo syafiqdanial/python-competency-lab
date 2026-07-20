@@ -22,6 +22,19 @@ def add_task(
     tasks.append(create_task(task_id, title, due_date=due_date))
 
 
+def list_tasks(tasks: list[Task]) -> None:
+    """Display each supplied task in a readable format."""
+    if not tasks:
+        print("No tasks found.")
+        return
+
+    for current_task in tasks:
+        status = "x" if current_task["completed"] else " "
+        due_date = current_task["due_date"]
+        due_text = f" (due: {due_date})" if due_date is not None else ""
+        print(f"[{status}] {current_task['id']}: {current_task['title']}{due_text}")
+
+
 # Initial task data
 tasks: list[Task] = []
 
@@ -29,7 +42,4 @@ add_task(tasks, 1, "Refresh my Python skills")
 add_task(tasks, 2, "Build a command-line task tracker", due_date="2026-08-01")
 
 # Display tasks
-print(tasks)
-
-for current_task in tasks:
-    print(current_task["title"])
+list_tasks(tasks)
