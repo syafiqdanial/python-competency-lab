@@ -35,11 +35,16 @@ def list_tasks(tasks: list[Task]) -> None:
         print(f"[{status}] {current_task['id']}: {current_task['title']}{due_text}")
 
 
-# Initial task data
-tasks: list[Task] = []
+# Program entry point
+def main() -> None:
+    """Create and display the initial task list."""
+    tasks: list[Task] = []
 
-add_task(tasks, 1, "Refresh my Python skills")
-add_task(tasks, 2, "Build a command-line task tracker", due_date="2026-08-01")
+    add_task(tasks, 1, "Refresh my Python skills")
+    add_task(tasks, 2, "Build a command-line task tracker", due_date="2026-08-01")
 
-# Display tasks
-list_tasks(tasks)
+    list_tasks(tasks)
+
+
+if __name__ == "__main__":
+    main()
