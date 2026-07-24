@@ -1,4 +1,4 @@
-from solutions.cli_task_tracker import create_task
+from solutions.cli_task_tracker import Task, add_task, create_task
 
 
 def test_create_task_without_due_date() -> None:
@@ -21,3 +21,18 @@ def test_create_task_with_due_date() -> None:
         "completed": False,
         "due_date": "2026-08-01",
     }
+
+
+def test_add_task_appends_created_task() -> None:
+    tasks: list[Task] = []
+
+    add_task(tasks, 3, "Practice list mutation")
+
+    assert tasks == [
+        {
+            "id": 3,
+            "title": "Practice list mutation",
+            "completed": False,
+            "due_date": None,
+        }
+    ]
