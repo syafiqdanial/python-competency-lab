@@ -60,3 +60,16 @@ def test_list_tasks_displays_pending_task_with_due_date(
     captured = capsys.readouterr()
 
     assert captured.out == "[ ] 7: Ship project (due: 2026-08-01)\n"
+
+
+def test_list_tasks_displays_completed_task_without_due_date(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    task = create_task(8, "Review Python")
+    task["completed"] = test_create_task_with_due_date
+
+    list_tasks([task])
+
+    captured = capsys.readouterr()
+
+    assert captured.out == "[x] 8: Review Python\n"
