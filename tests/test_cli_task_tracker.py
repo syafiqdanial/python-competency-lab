@@ -48,3 +48,15 @@ def test_list_tasks_reports_empty_list(
     captured = capsys.readouterr()
 
     assert captured.out == "No tasks found.\n"
+
+
+def test_list_tasks_displays_pending_task_with_due_date(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    tasks = [create_task(7, "Ship project", due_date="2026-08-01")]
+
+    list_tasks(tasks)
+
+    captured = capsys.readouterr()
+
+    assert captured.out == "[ ] 7: Ship project (due: 2026-08-01)\n"
