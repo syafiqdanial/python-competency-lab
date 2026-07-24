@@ -22,6 +22,15 @@ def add_task(
     tasks.append(create_task(task_id, title, due_date=due_date))
 
 
+def find_task(tasks: list[Task], task_id: int) -> Task | None:
+    """Return the matching task, or None when it is not found."""
+    for current_task in tasks:
+        if current_task["id"] == task_id:
+            return current_task
+
+    return None
+
+
 def list_tasks(tasks: list[Task]) -> None:
     """Display each supplied task in a readable format."""
     if not tasks:
