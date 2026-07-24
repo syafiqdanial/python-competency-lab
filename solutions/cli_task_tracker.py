@@ -31,6 +31,17 @@ def find_task(tasks: list[Task], task_id: int) -> Task | None:
     return None
 
 
+def complete_task(tasks: list[Task], task_id: int) -> bool:
+    """Mark the matching task as completed and report whether it was found."""
+    task = find_task(tasks, task_id)
+
+    if task is None:
+        return False
+
+    task["completed"] = True
+    return True
+
+
 def list_tasks(tasks: list[Task]) -> None:
     """Display each supplied task in a readable format."""
     if not tasks:
