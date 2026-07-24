@@ -3,6 +3,7 @@ import pytest
 from solutions.cli_task_tracker import (
     Task,
     add_task,
+    complete_task,
     create_task,
     find_task,
     list_tasks,
@@ -98,3 +99,29 @@ def test_find_task_returns_none_when_id_is_missing() -> None:
     result = find_task(tasks, 99)
 
     assert result is None
+
+
+def test_complete_task_marks_matching_task_completed() -> None:
+    tasks = [
+        create_task(1, "Learn Python"),
+        create_task(2, "Write tests"),
+    ]
+
+    result = complete_task(tasks, 2)
+
+    assert result is True
+    assert tasks[0]["completed"] is False
+    assert tasks[1]["completed"] is True
+
+
+def test_complete_task_returns_false_when_id_is_missing() -> None:
+    tasks = [
+        create_task(1, "Learn Python"),
+        create_task(2, "Write tests"),
+    ]
+
+    result = complete_task(tasks, 99)
+
+    assert result is False
+    assert tasks[0]["completed"] is False
+    assert tasks[1]["completed"] is False
