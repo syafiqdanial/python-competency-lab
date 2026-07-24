@@ -140,3 +140,16 @@ def test_edit_task_updates_matching_title() -> None:
     assert tasks[0]["title"] == "Learn Python"
     assert tasks[1]["title"] == "Write better tests"
     assert tasks[1]["due_date"] == "2026-08-01"
+
+
+def test_edit_task_returns_false_when_id_is_missing() -> None:
+    tasks = [
+        create_task(1, "Learn Python"),
+        create_task(2, "Write tests"),
+    ]
+
+    result = edit_task(tasks, 99, "Unexpected title")
+
+    assert result is False
+    assert tasks[0]["title"] == "Learn Python"
+    assert tasks[1]["title"] == "Write tests"
