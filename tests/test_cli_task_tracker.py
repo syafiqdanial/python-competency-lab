@@ -1,4 +1,6 @@
-from solutions.cli_task_tracker import Task, add_task, create_task
+import pytest
+
+from solutions.cli_task_tracker import Task, add_task, create_task, list_tasks
 
 
 def test_create_task_without_due_date() -> None:
@@ -36,3 +38,13 @@ def test_add_task_appends_created_task() -> None:
             "due_date": None,
         }
     ]
+
+
+def test_list_tasks_reports_empty_list(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    list_tasks([])
+
+    captured = capsys.readouterr()
+
+    assert captured.out == "No tasks found.\n"
