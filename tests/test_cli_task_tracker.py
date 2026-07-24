@@ -5,6 +5,7 @@ from solutions.cli_task_tracker import (
     add_task,
     complete_task,
     create_task,
+    edit_task,
     find_task,
     list_tasks,
 )
@@ -125,3 +126,17 @@ def test_complete_task_returns_false_when_id_is_missing() -> None:
     assert result is False
     assert tasks[0]["completed"] is False
     assert tasks[1]["completed"] is False
+
+
+def test_edit_task_updates_matching_title() -> None:
+    tasks = [
+        create_task(1, "Learn Python"),
+        create_task(2, "Write tests", due_date="2026-08-01"),
+    ]
+
+    result = edit_task(tasks, 2, "Write better tests")
+
+    assert result is True
+    assert tasks[0]["title"] == "Learn Python"
+    assert tasks[1]["title"] == "Write better tests"
+    assert tasks[1]["due_date"] == "2026-08-01"

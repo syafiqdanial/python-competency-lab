@@ -42,6 +42,17 @@ def complete_task(tasks: list[Task], task_id: int) -> bool:
     return True
 
 
+def edit_task(tasks: list[Task], task_id: int, title: str) -> bool:
+    """Update the matching task title and report whether it was found."""
+    task = find_task(tasks, task_id)
+
+    if task is None:
+        return False
+
+    task["title"] = title
+    return True
+
+
 def list_tasks(tasks: list[Task]) -> None:
     """Display each supplied task in a readable format."""
     if not tasks:
