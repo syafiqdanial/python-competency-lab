@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import pytest
 
 from solutions.cli_task_tracker import (
@@ -9,6 +12,7 @@ from solutions.cli_task_tracker import (
     edit_task,
     find_task,
     list_tasks,
+    save_tasks,
 )
 
 
@@ -180,3 +184,14 @@ def test_delete_task_returns_false_when_id_is_missing() -> None:
     assert len(tasks) == 2
     assert tasks[0] is first_task
     assert tasks[1] is second_task
+
+
+def test_save_tasks_writes_json_file(tmp_path: Path) -> None:
+    tasks = [create_task(1, "Persist me")]
+    file_path = tmp_path / "tasks.json"
+
+    save_tasks(tasks, file_path)
+
+    saved_data = json.loads(file_path.read_text(encoding="utf-8"))
+
+    assert saved_data == tasks

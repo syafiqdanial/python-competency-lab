@@ -1,5 +1,15 @@
+import json
+from pathlib import Path
+
 # Type aliases
 Task = dict[str, object]
+
+
+# Persistence
+def save_tasks(tasks: list[Task], file_path: Path) -> None:
+    """Save tasks to a JSON file."""
+    with file_path.open("w", encoding="utf-8") as file:
+        json.dump(tasks, file, indent=2)
 
 
 # Task operations
