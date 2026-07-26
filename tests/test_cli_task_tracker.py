@@ -167,3 +167,16 @@ def test_delete_task_removes_matching_task() -> None:
     assert len(tasks) == 1
     assert tasks[0] is second_task
     assert tasks[0]["id"] == 2
+
+
+def test_delete_task_returns_false_when_id_is_missing() -> None:
+    first_task = create_task(1, "Learn Python")
+    second_task = create_task(2, "Write tests")
+    tasks = [first_task, second_task]
+
+    result = delete_task(tasks, 99)
+
+    assert result is False
+    assert len(tasks) == 2
+    assert tasks[0] is first_task
+    assert tasks[1] is second_task
