@@ -5,6 +5,7 @@ from solutions.cli_task_tracker import (
     add_task,
     complete_task,
     create_task,
+    delete_task,
     edit_task,
     find_task,
     list_tasks,
@@ -153,3 +154,16 @@ def test_edit_task_returns_false_when_id_is_missing() -> None:
     assert result is False
     assert tasks[0]["title"] == "Learn Python"
     assert tasks[1]["title"] == "Write tests"
+
+
+def test_delete_task_removes_matching_task() -> None:
+    first_task = create_task(1, "Learn Python")
+    second_task = create_task(2, "Write tests")
+    tasks = [first_task, second_task]
+
+    result = delete_task(tasks, 1)
+
+    assert result is True
+    assert len(tasks) == 1
+    assert tasks[0] is second_task
+    assert tasks[0]["id"] == 2

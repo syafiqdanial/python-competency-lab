@@ -53,6 +53,17 @@ def edit_task(tasks: list[Task], task_id: int, title: str) -> bool:
     return True
 
 
+def delete_task(tasks: list[Task], task_id: int) -> bool:
+    """Delete the matching task and report whether it was found."""
+    task = find_task(tasks, task_id)
+
+    if task is None:
+        return False
+
+    tasks.remove(task)
+    return True
+
+
 def list_tasks(tasks: list[Task]) -> None:
     """Display each supplied task in a readable format."""
     if not tasks:
