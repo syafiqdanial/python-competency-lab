@@ -12,6 +12,7 @@ from solutions.cli_task_tracker import (
     edit_task,
     find_task,
     list_tasks,
+    load_tasks,
     save_tasks,
 )
 
@@ -195,3 +196,15 @@ def test_save_tasks_writes_json_file(tmp_path: Path) -> None:
     saved_data = json.loads(file_path.read_text(encoding="utf-8"))
 
     assert saved_data == tasks
+
+
+def test_load_tasks_reads_json_file(tmp_path: Path) -> None:
+    first_task = create_task(1, "Learn Python")
+    tasks = [first_task]
+    file_path = tmp_path / "tasks.json"
+
+    save_tasks(tasks, file_path)
+
+    tasks_loaded = load_tasks(file_path)
+
+    assert tasks_loaded == tasks

@@ -12,6 +12,13 @@ def save_tasks(tasks: list[Task], file_path: Path) -> None:
         json.dump(tasks, file, indent=2)
 
 
+def load_tasks(file_path: Path) -> list[Task]:
+    """Load tasks from a JSON file."""
+    with file_path.open("r", encoding="utf-8") as file:
+        tasks: list[Task] = json.load(file)
+        return tasks
+
+
 # Task operations
 def create_task(
     task_id: int,
