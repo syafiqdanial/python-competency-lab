@@ -16,12 +16,17 @@ def load_tasks(file_path: Path) -> list[Task]:
     """Load tasks from a JSON file."""
     try:
         with file_path.open("r", encoding="utf-8") as file:
-            tasks: list[Task] = json.load(file)
-            return tasks
+            loaded_data: object = json.load(file)
     except FileNotFoundError:
         return []
     except json.JSONDecodeError as error:
         raise ValueError("Task file contains invalid JSON.") from error
+
+    if not isinstance(loaded_data, list):
+        raise ValueError("Task file must contain a list of tasks.")
+
+    tasks: list[Task] = loaded_data
+    return tasks
 
 
 # Task operations

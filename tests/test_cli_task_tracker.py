@@ -226,3 +226,13 @@ def test_load_tasks_rejects_corrupted_json(tmp_path: Path) -> None:
         load_tasks(file_path)
 
     assert str(exception_info.value) == "Task file contains invalid JSON."
+
+
+def test_load_tasks_rejects_non_list_json(tmp_path: Path) -> None:
+    file_path = tmp_path / "tasks.json"
+    file_path.write_text('{"id": 1}', encoding="utf-8")
+
+    with pytest.raises(ValueError) as exception_info:
+        load_tasks(file_path)
+
+    assert str(exception_info.value) == "Task file must contain a list of tasks."
