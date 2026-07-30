@@ -14,9 +14,14 @@ def save_tasks(tasks: list[Task], file_path: Path) -> None:
 
 def load_tasks(file_path: Path) -> list[Task]:
     """Load tasks from a JSON file."""
-    with file_path.open("r", encoding="utf-8") as file:
-        tasks: list[Task] = json.load(file)
-        return tasks
+    try:
+        with file_path.open("r", encoding="utf-8") as file:
+            tasks: list[Task] = json.load(file)
+            return tasks
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError as error:
+        raise ValueError("Task file contains invalid JSON.") from error
 
 
 # Task operations

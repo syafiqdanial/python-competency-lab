@@ -208,3 +208,21 @@ def test_load_tasks_reads_json_file(tmp_path: Path) -> None:
     tasks_loaded = load_tasks(file_path)
 
     assert tasks_loaded == tasks
+
+
+def test_load_tasks_returns_empty_list_when_file_is_missing(tmp_path: Path) -> None:
+    file_path = tmp_path / "missing-tasks.json"
+
+    loaded_tasks = load_tasks(file_path)
+
+    assert loaded_tasks == []
+
+
+def test_load_tasks_rejects_corrupted_json(tmp_path: Path) -> None:
+    file_path = tmp_path / "tasks.json"
+    file_path.write_text("{invalid json", encoding="utf-8")
+
+    with pytest.raises(ValueError) as exception_info:
+        load_tasks(file_path)
+
+    assert str(exception_info.value) == "Task file contains invalid JSON."
